@@ -1,0 +1,3 @@
+data/raw_silver/*.json
+data/clean_silver/*.json
+tarefas.pdf
