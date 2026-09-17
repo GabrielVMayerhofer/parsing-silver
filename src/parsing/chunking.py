@@ -68,7 +68,7 @@ def gerar_chunks(documento_id, paginas, tamanho_max_chunks=1000):
     for pagina in paginas:
         numero_pagina = pagina["page"]
         texto_da_pagina = pagina["text"]
-        secao_da_pagina = pagina.get("section")  # pega se tiver, senão vem None
+
 
         pedacos = dividir_texto(texto_da_pagina, tamanho_max_chunks)
 
@@ -79,7 +79,6 @@ def gerar_chunks(documento_id, paginas, tamanho_max_chunks=1000):
                 "chunk_id": id_do_chunk,
                 "document_id": documento_id,
                 "page": numero_pagina,
-                "section": secao_da_pagina,
                 "text": pedaco,
             }
 
