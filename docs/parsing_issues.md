@@ -21,3 +21,11 @@
 - Quebras de linha e tabulações normalizadas.
 - Sumários mantidos.
 - Páginas vazias mantidas para não ficar com "página perdida"
+
+## Observações do chunking 
+
+- Cada chunk carrega chunk_id, document_id, page e text
+- O chunk_id é fixo e previsível: documento + página + posição na página 
+- Páginas "vazias" (como as do PRES_13) simplesmente não geram chunk nenhum, não dá erro, só não aparece nada pra elas no resultado final
+- Documentos com sumário (PRES_03, PRES_07, PRES_09) são chunkados normalmente
+- De vez em quando aparece um chunk bem curtinho no fim de um texto grande, é normal, faz parte de como o corte funciona
