@@ -13,11 +13,18 @@ data/
 └── silver/                     # Chunks gerados
 
 src/parsing/
-├── builder_silver.py           # Executa src/parsing/
-└── parsing/
-    ├── extract.py              # Extração
-    ├── clean.py                # Limpeza
-    └── chunk.py                # Chunking
+├── extract.py                  # Extração
+├── clean.py                    # Limpeza
+├── chunk.py                    # Chunking
+└── builder_silver.py           # Execução do pipeline
+```
+
+## Requisitos
+
+Instale as dependências do projeto:
+
+```bash
+pip install -r requirements.txt
 ```
 
 ## Execução
@@ -33,5 +40,3 @@ O pipeline segue:
 ```text
 PDF → Extração → Limpeza → Chunks
 ```
-
-Os documentos processados são identificados pelo `document_id` presente em `data/metadata/documents.csv`.
