@@ -42,21 +42,16 @@ def clean_cabecalho_page_num(text, document_id, page_num):
 
     return text.strip()
 
-def clean_text():
-    with open("data/metadata/documents.csv", "r", encoding="utf-8") as csvfile:
-        reader = csv.DictReader(csvfile)
-        for row in reader:
-            document_id = row["document_id"]
+def clean_text(document_id):
+    with open(f"data/raw_silver/{document_id}.json", "r", encoding="utf-8") as f:
+        document = json.load(f)
 
-            with open(f"data/raw_silver/{document_id}.json", "r", encoding="utf-8") as f:
-                document = json.load(f)
+    for page in document["pages"]:
+        page["text"] = clean_n(page["text"])
+        page["text"] = clean_cabecalho_page_num(page["text"], document_id, page["page"])
 
-            for page in document["pages"]:
-                page["text"] = clean_n(page["text"])
-                page["text"] = clean_cabecalho_page_num(page["text"], document_id, page["page"])
-
-            with open(f"data/clean_silver/{document_id}.json", "w", encoding="utf-8") as f:
-                json.dump(document, f, ensure_ascii=False, indent=4)
+    with open(f"data/clean_silver/{document_id}.json", "w", encoding="utf-8") as f:
+        json.dump(document, f, ensure_ascii=False, indent=4)
 
     # Teste feito com um unico arquivo
     # filename = "PRES_01"
@@ -69,5 +64,3 @@ def clean_text():
 
     # with open(f"data/clean_silver/{filename}.json", "w", encoding="utf-8") as f:
     #     json.dump(document, f, ensure_ascii=False, indent=4)
-
-clean_text()

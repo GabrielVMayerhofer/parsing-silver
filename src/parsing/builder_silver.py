@@ -1,9 +1,10 @@
 import json
 import os
+import csv
 import pandas as pd
 from chunking import gerar_chunks
-#from clean import clean_text
-#from extract import extract_text
+from clean import clean_text
+from extract import extract_text
 
 
 #Pega cada arquivo da pasta e separa em documentos
@@ -58,6 +59,16 @@ def construir_silver(pasta_entrada, caminho_saida):
 
 
 if __name__ == "__main__":
+    with open("data/metadata/documents.csv", "r", encoding="utf-8") as csvfile:
+        reader = csv.DictReader(csvfile)
+
+        for row in reader:
+            filename = row["filename"]
+            document_id = row["document_id"]
+
+            extract_text(filename, document_id)
+            clean_text(document_id)
+
     construir_silver(
         pasta_entrada="data/clean_silver",
         caminho_saida="data/silver/chunks.parquet",
